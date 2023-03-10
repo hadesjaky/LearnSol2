@@ -8,7 +8,7 @@
 *   Counter合约有一个add（x）的方法
 
 ![w1_1_1](https://github.com/hadesjaky/LearnSol2/blob/master/w1_1/w1_1.png)
-![w1_1_2](https://github.com/hadesjaky/LearnSol2/blob/master/w1_1/w1_2.png)
+![w1_1_2](https://github.com/hadesjaky/LearnSol2/blob/master/w1_1/w1_1_2.png)
 
 ## W1-2作业
 * 修改Counter合约，仅有部署者可以调用count（）；

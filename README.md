@@ -15,5 +15,6 @@
 * 使用Hardhat部署修改后的Counter
 * 使用Hardhat测试Counter：
 * 代码开源到区块链浏览器（npx hardhat verify ）/写上合约地址
+(注意：npx hardhat verify  ethscan接口在国内被墙了，拿到国外的vps上执行成功)
 
 ![w1_2](https://github.com/hadesjaky/LearnSol2/blob/master/w1_2/w1_2.png)

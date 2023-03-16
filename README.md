@@ -18,3 +18,12 @@
 (注意：npx hardhat verify  ethscan接口在国内被墙了，拿到国外的vps上执行成功)
 
 ![w1_2](https://github.com/hadesjaky/LearnSol2/blob/master/w1_2/w1_2.png)
+
+## W2-1作业
+* 编写一个Bank合约：
+*  通过Metamask向Bank合约转账ETH
+*  在Bank合约记录每个地址转账金额
+*  编写Bank合约withdraw（），实现提取出所有的ETH
+
+[w2_1](https://github.com/hadesjaky/LearnSol2/tree/master/w2_1)
+

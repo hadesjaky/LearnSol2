@@ -27,3 +27,26 @@
 
 [w2_1](https://github.com/hadesjaky/LearnSol2/tree/master/w2_1)
 
+## w3-1作业
+* 发行一个 ERC20Tken (用自己的名字) ， 发行 100000 token
+* 编写一个金库Vault 合约:
+* 编写 deposite 方法，实现 ERC20 存入Vaut，并记录每个用户存款金额 approve/transferFrom)
+* 编写 withdraw 方法，提取用户自己的存款0
+* 进阶练习:
+* 使用 ERC2612 标准Tken ， 使用签名的方式 deposite
+### 第二个作业
+* 发行一个 ERC721 Token (用自己的名字)。
+* 铸造 一个 NFT，在测试网上发行，在 Opensea 上查看。
+* 编写一个合约: 使用自己发行的ERC20 Token 来买卖NFT。
+* NFT 持有者可上架 NFT (设置价格 多少个TOKEN 购买 NFT )。
+* 编写购买NFT 方法，转入对应的TOKEN，获取对应的 NFT。
+
+[w3_1](https://github.com/hadesjaky/LearnSol2/tree/master/w3_1)
+
+## w3-2作业
+* 部署一个可升级的 ERC20 Token
+* 第一版本
+* 第二版本，加入方法: function transferWithCallback(address recipient, uint256amount) external returns (bool)
+
+[w3_2](https://github.com/hadesjaky/LearnSol2/tree/master/w3_2)
+

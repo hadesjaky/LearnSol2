@@ -50,3 +50,16 @@
 
 [w3_2](https://github.com/hadesjaky/LearnSol2/tree/master/w3_2)
 
+## w4-1作业
+* 编写前端使用之前的Vault合约：
+用户可通过前端进行存款
+  两个方式： Approve+deposit
+  最好使用ERC2612（Permit）方式更好  （permitDeposit）
+  前端显示用户存款金额
+  用户可通过前端提取用户自己的存款（withdraw）
+
+* 发行一个ERC721 Token：
+  使用ethers.js解析ERC721转账时间
+  加分项： 记录到数据库中，可方便查询用户持有的所有NFT
+
+[w4_1](https://github.com/hadesjaky/LearnSol2/tree/master/w4_1)

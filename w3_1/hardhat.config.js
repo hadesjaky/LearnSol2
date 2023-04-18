@@ -1,4 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
+require('hardhat-abi-exporter');
+
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -20,6 +22,14 @@ module.exports = {
       chainId: 5,
       accounts:[mnemonic]
     }
+  },
+  abiExporter: {
+    path: './deployments/abi',
+    clear: true,
+    flat: true,
+    only: [],
+    spacing: 2,
+    pretty: true,
   },
   etherscan: {
     apiKey: `${process.env.ETHERSCAN}`

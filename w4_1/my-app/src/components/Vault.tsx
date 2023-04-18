@@ -3,20 +3,20 @@ import {useState} from 'react'
 import {Address, useAccount, useEnsName, useNetwork, useWaitForTransaction, useSignTypedData, useSigner} from 'wagmi'
 
 import {
-    useDawantCoinName,
-    useDawantCoinNonces, useDawantCoinPermit,
+    useJkCoinName,
+    useJkCoinNonces, useJkCoinPermit,
     useErc20Allowance,
     useErc20Approve,
     useErc20BalanceOf,
     useErc20Name,
     useErc20Symbol,
     useErc20TotalSupply,
-    useErc20Transfer, usePrepareDawantCoinPermit,
+    useErc20Transfer, usePrepareJkCoinPermit,
     usePrepareErc20Approve,
     usePrepareErc20Transfer,
     usePrepareVaultDeposit,
     usePrepareVaultPermitDeposit, usePrepareVaultWithdraw,
-    useVaultBalances,
+    // useVaultBalances,
     useVaultDeposit,
     useVaultPermitDeposit, useVaultWithdraw,
 } from '../generated'
@@ -29,7 +29,7 @@ export function Vault() {
         '0xc91aeFf8d82878645D704d7278EC17642e88E9B4',
     )
 
-    const [vaultAddress, setVaultAddress] = useState<Address>('0x46A1240bAeF1969bFb8fCc0c3D7320Df9689cD18',)
+    const [vaultAddress, setVaultAddress] = useState<Address>('0x5B35CB953469Bc66874325711C1ac50cEcBFe46d',)
 
 
     return (
@@ -44,7 +44,7 @@ export function Vault() {
             {vaultAddress && (
                 <>
                     <h3>Info</h3>
-                    <BalanceOf address={address as Address}/>
+                    {/* <BalanceOf address={address as Address}/> */}
                     <h3>Deposit</h3>
                     <Deposit/>
                     <DepositPermit tokenAddress={erc20Address as Address} contractAddress={vaultAddress as Address}
@@ -57,15 +57,15 @@ export function Vault() {
 }
 
 
-function BalanceOf({address}: {
-    address: Address
-}) {
-    const {data: balance} = useVaultBalances({
-        args: [address],
-        watch: true,
-    })
-    return <div>Balance: {balance?.toString()} units</div>
-}
+// function BalanceOf({address}: {
+//     address: Address
+// }) {
+//     const {data: balance} = useVaultBalances({
+//         args: [address],
+//         watch: true,
+//     })
+//     return <div>Balance: {balance?.toString()} units</div>
+// }
 
 
 function Deposit() {
@@ -135,7 +135,7 @@ function DepositPermit({tokenAddress, contractAddress, address,}: {
 
     const [amount, setAmount] = useState('0')
 
-    let {data: nonce} = useDawantCoinNonces({args: [address as Address]})
+    let {data: nonce} = useJkCoinNonces({args: [address as Address]})
     const deadline = BigNumber.from(9999999999999);
     const {chain} = useNetwork();
     const chainId = chain?.id
@@ -144,7 +144,7 @@ function DepositPermit({tokenAddress, contractAddress, address,}: {
         nonce = BigNumber.from(0)
     }
 
-    const {data: name} = useDawantCoinName()
+    const {data: name} = useJkCoinName()
 
     const domain = {
         name: name, version: '1', chainId: chainId, verifyingContract: tokenAddress

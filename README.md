@@ -63,3 +63,11 @@
   加分项： 记录到数据库中，可方便查询用户持有的所有NFT
 
 [w4_1](https://github.com/hadesjaky/LearnSol2/tree/master/w4_1)
+
+## w4_2作业
+*  发行一个ERC721 Token （使用之前发布的就可以）
+*  用TheGraph 索引ERC721的转账事件
+*  在playground可查询到数据（截图）
+*  用Dune查询过去30天USDC的价格变化
+
+[w4_2](https://github.com/hadesjaky/LearnSol2/tree/master/w4_2)

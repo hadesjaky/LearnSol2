@@ -17,7 +17,7 @@ import {
 export function ERC20() {
   const { address } = useAccount()
   const [contractAddress, setContractAddress] = useState<Address>(
-    '0xc91aeFf8d82878645D704d7278EC17642e88E9B4',
+    '0x5B35CB953469Bc66874325711C1ac50cEcBFe46d',
   )
 
   return (
@@ -90,7 +90,7 @@ function Allowance({
 }) {
   const [amount, setAmount] = useState('')
   const [spender, setSpender] = useState(
-    '0xc961145a54C96E3aE9bAA048c4F4D6b04C13916b' as Address,
+    '0x41Cf0AD2C4Ba30C767Fb2967480C1EFc47ac006A' as Address,
   )
 
   const { config, error, isError } = usePrepareErc20Approve({

@@ -1,64 +1,57 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.7;
+//SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Vault {
-    struct Deposit {
-        uint256 amount;
-        bool deposited;
+    mapping(address => uint) public deposited;
+    address public immutable token;
+
+    using SafeMath for uint;
+
+    constructor(address _token) {
+        token = _token;
     }
 
-    mapping(address => Deposit) public deposits;
-
-    function deposit(
-        address token,
+    function permitDeposit(
         address user,
-        uint256 amount,
-        bytes memory signature
-    ) public {
-        bytes32 message = keccak256(abi.encodePacked(token, user, amount));
-        address signer = recoverSigner(message, signature);
-        require(signer == user, "Vault: invalid signature");
-
-        Deposit storage userDeposit = deposits[user];
-        require(!userDeposit.deposited, "Vault: deposit already made");
-
-        SafeERC20.safeTransferFrom(IERC20(token), user, address(this), amount);
-
-        userDeposit.amount = amount;
-        userDeposit.deposited = true;
+        uint amount,
+        uint deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external {
+        IERC20Permit(token).permit(
+            msg.sender,
+            address(this),
+            amount,
+            deadline,
+            v,
+            r,
+            s
+        );
+        deposit(user, amount);
     }
 
-    function recoverSigner(
-        bytes32 message,
-        bytes memory signature
-    ) public pure returns (address) {
-        bytes32 r;
-        bytes32 s;
-        uint8 v;
+    function deposit(address user, uint amount) public {
+        require(
+            IERC20(token).transferFrom(msg.sender, address(this), amount),
+            "Transfer from error"
+        );
+        deposited[user] += amount;
+    }
 
-        if (signature.length != 65) {
-            return address(0);
-        }
-
-        assembly {
-            r := mload(add(signature, 32))
-            s := mload(add(signature, 64))
-            v := byte(0, mload(add(signature, 96)))
-        }
-
-        if (v < 27) {
-            v += 27;
-        }
-
-        if (v != 27 && v != 28) {
-            return address(0);
-        } else {
-            return ecrecover(message, v, r, s);
-        }
+    function withdraw(uint amount) public {
+        uint money = deposited[msg.sender];
+        require(money >= 0, "No Money!");
+        (bool ok, ) = money.trySub(amount);
+        require(ok, "Not Enough!");
+        require(
+            IERC20(token).transfer(msg.sender, amount),
+            "Transfer from error"
+        );
+        deposited[msg.sender] = deposited[msg.sender].sub(amount);
     }
 }

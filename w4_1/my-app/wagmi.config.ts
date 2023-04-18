@@ -13,13 +13,13 @@ export default defineConfig({
             abi: vaultAbi,
             name: 'Vault',
             address: {
-                [chains.polygonMumbai.id]: '0x46A1240bAeF1969bFb8fCc0c3D7320Df9689cD18'
+                [chains.goerli.id]: '0x371bB96598623Ae47532ECfD755e94EA54825740'
             }
         }, {
             abi: erc20Permit,
-            name: 'Dawant Coin',
+            name: 'JK Coin',
             address: {
-                [chains.polygonMumbai.id]: '0xc91aeFf8d82878645D704d7278EC17642e88E9B4'
+                [chains.goerli.id]: '0x5B35CB953469Bc66874325711C1ac50cEcBFe46d'
             }
         }
     ]

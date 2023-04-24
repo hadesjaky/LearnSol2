@@ -19,6 +19,7 @@
     "ethereum-waffle": "^4.0.10",
     "ethers": "^5.7.2",
     "hardhat": "^2.13.0",
+    "hardhat-abi-exporter": "^2.10.1",
     "hardhat-gas-reporter": "^1.0.9",
     "solidity-coverage": "^0.8.2",
     "ts-node": "^10.9.1",
@@ -28,5 +29,8 @@
     "test": "npx hardhat test",
     "deploy": "npx hardhat run scripts/deploy.js --network goerli",
     "node": "npx hardhat node"
+  },
+  "dependencies": {
+    "package.json": "^2.0.1"
   }
 }

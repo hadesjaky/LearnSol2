@@ -1,0 +1,11 @@
+[
+  "constructor(address)",
+  "function allValue() view returns (uint256)",
+  "function deposit(address,uint256)",
+  "function deposited(address) view returns (uint256)",
+  "function owner() view returns (address)",
+  "function permitDeposit(address,uint256,uint256,uint8,bytes32,bytes32)",
+  "function token() view returns (address)",
+  "function valueToCold()",
+  "function withdraw(uint256)"
+]

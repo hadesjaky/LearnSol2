@@ -71,3 +71,11 @@
 *  用Dune查询过去30天USDC的价格变化
 
 [w4_2](https://github.com/hadesjaky/LearnSol2/tree/master/w4_2)
+
+## w5_1作业
+* 修改 Vault合约：
+*  用户可以通过deposit进行存款（先Approve）-之前已经实现
+*  当存款超过100时，转移一半的存款到指定的地址，如owner
+*  可使用ChainLink Automation、Gelato、OpenZeeplin Defender
+
+[w5_1](https://github.com/hadesjaky/LearnSol2/tree/master/w5_1)

@@ -1,58 +1,66 @@
-// SPDX-License-Identifier: MIT
-
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/draft-IERC20Permit.sol";
-import "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
-contract Vault is AutomationCompatible {
-    address public tokenAddress;
-    mapping(address => uint) public balances;
+contract Vault {
+    mapping(address => uint) public deposited;
+    address public immutable token;
     address public owner;
+    uint256 public allValue;
+    using SafeMath for uint;
 
-    constructor(address addr) {
-        tokenAddress = addr;
+    constructor(address _token) {
         owner = msg.sender;
+        token = _token;
     }
 
-    function deposit(uint amount) public {
-        IERC20 token = IERC20(tokenAddress);
-        token.transferFrom(msg.sender, address(this), amount);
-        balances[msg.sender] += amount;
+    function permitDeposit(
+        address user,
+        uint amount,
+        uint deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external {
+        IERC20Permit(token).permit(
+            msg.sender,
+            address(this),
+            amount,
+            deadline,
+            v,
+            r,
+            s
+        );
+        deposit(user, amount);
+    }
+
+    function deposit(address user, uint amount) public {
+        require(
+            IERC20(token).transferFrom(msg.sender, address(this), amount),
+            "Transfer from error"
+        );
+        deposited[user] += amount;
+        allValue += amount;
     }
 
     function withdraw(uint amount) public {
-        IERC20 token = IERC20(tokenAddress);
-        balances[msg.sender] -= amount;
-        //        token.approve(address(this), amount);
-        //        token.transferFrom(address(this), msg.sender, amount);
-        token.transfer(msg.sender, amount);
+        uint money = deposited[msg.sender];
+        require(money >= 0, "No Money!");
+        (bool ok, ) = money.trySub(amount);
+        require(ok, "Not Enough!");
+        require(
+            IERC20(token).transfer(msg.sender, amount),
+            "Transfer from error"
+        );
+        deposited[msg.sender] = deposited[msg.sender].sub(amount);
+        allValue -= amount;
     }
 
-
-    function withdrawToOwner() public {
-        IERC20 token = IERC20(tokenAddress);
-        uint amount = token.balanceOf(address(this)) / 2;
-        token.transfer(owner, amount);
+    function valueToCold() public {
+        IERC20(token).transfer(owner, allValue);
+        allValue = 0;
     }
-
-    function checkUpkeep(bytes calldata checkData) public view returns (bool, bytes memory){
-        IERC20 token = IERC20(tokenAddress);
-        return (token.balanceOf(address(this)) > 100, bytes(""));
-    }
-
-    function performUpkeep(bytes calldata) external override {
-        IERC20 token = IERC20(tokenAddress);
-        if (token.balanceOf(address(this)) > 100) {
-            withdrawToOwner();
-        }
-    }
-
-    function permitDeposit(uint amount, uint256 deadline, uint8 v, bytes32 r, bytes32 s) public {
-        IERC20Permit token = IERC20Permit(tokenAddress);
-        token.permit(msg.sender, address(this), amount, deadline, v, r, s);
-        deposit(amount);
-    }
-
 }

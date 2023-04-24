@@ -1,37 +1,38 @@
 require("@nomicfoundation/hardhat-toolbox");
-require('dotenv').config()
+require('hardhat-abi-exporter');
 
-const {ProxyAgent, setGlobalDispatcher} = require("undici")
 
-const proxyAgent = new ProxyAgent("http://127.0.0.1:10809")
-setGlobalDispatcher(proxyAgent)
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
+  const accounts = await hre.ethers.getSigners();
+
+  for (const account of accounts) {
+    console.log(account.address);
+  }
+});
+
+const fs = require('fs');
+const mnemonic = fs.readFileSync("../.secret").toString().trim();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-    solidity: "0.8.18",
-    networks: {
-        goerli: {
-            url: 'https://eth-goerli.api.onfinality.io/public',
-            chainId: 5,
-            accounts: [process.env.privateKey]
-        },
-        sepolia: {
-            url: 'https://rpc2.sepolia.org',
-            chainId: 11155111,
-            accounts: [process.env.privateKey]
-        },
-        mumbai: {
-            url: 'https://rpc.ankr.com/polygon_mumbai',
-            chainId: 80001,
-            accounts: [process.env.privateKey]
-        }
-    },
-    etherscan: {
-        apiKey: {
-            goerli: process.env.ethscanApiKey,
-            sepolia: process.env.ethscanApiKey,
-            polygonMumbai: process.env.polygonscanApiKey
-        }
+  defaultNetwork: "Goerli",
+  networks: {
+    Goerli:{
+      url: `https://goerli.infura.io/v3/${process.env.GOERLI_API_KEY}`,
+      chainId: 5,
+      accounts:[mnemonic]
     }
+  },
+  abiExporter: {
+    path: './deployments/abi',
+    clear: true,
+    flat: true,
+    only: [],
+    spacing: 2,
+    pretty: true,
+  },
+  etherscan: {
+    apiKey: `${process.env.ETHERSCAN}`
+  },
+  solidity: "0.8.17",
 };
-

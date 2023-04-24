@@ -1,0 +1,7 @@
+[
+  "constructor(address,address)",
+  "function atoken() view returns (address)",
+  "function checker() view returns (bool, bytes)",
+  "function toBytes1(uint256) pure returns (bytes)",
+  "function valutAddr() view returns (address)"
+]

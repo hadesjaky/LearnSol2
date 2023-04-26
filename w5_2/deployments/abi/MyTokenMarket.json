@@ -1,0 +1,8 @@
+[
+  "constructor(address,address,address)",
+  "function AddLiquidity(uint256) payable",
+  "function buyToken(uint256) payable",
+  "function myToken() view returns (address)",
+  "function router() view returns (address)",
+  "function weth() view returns (address)"
+]

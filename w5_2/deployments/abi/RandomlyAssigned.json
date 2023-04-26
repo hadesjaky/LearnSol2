@@ -1,0 +1,6 @@
+[
+  "event SupplyChanged(uint256 indexed)",
+  "function availableTokenCount() view returns (uint256)",
+  "function tokenCount() view returns (uint256)",
+  "function totalSupply() view returns (uint256)"
+]

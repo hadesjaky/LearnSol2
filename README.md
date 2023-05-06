@@ -79,3 +79,11 @@
 *  可使用ChainLink Automation、Gelato、OpenZeeplin Defender
 
 [w5_1](https://github.com/hadesjaky/LearnSol2/tree/master/w5_1)
+
+## w5_2作业
+* 完成代币兑换后，直接质押MasterChef
+* withdraw（）：从MasterChef提取Token方法
+
+[w5_2](https://github.com/hadesjaky/LearnSol2/tree/master/w5_2)
+
+##w6_1

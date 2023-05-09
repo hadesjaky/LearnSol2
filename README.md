@@ -81,9 +81,52 @@
 [w5_1](https://github.com/hadesjaky/LearnSol2/tree/master/w5_1)
 
 ## w5_2作业
-* 完成代币兑换后，直接质押MasterChef
-* withdraw（）：从MasterChef提取Token方法
+* 部署自己的ERC20合约MyToken
+* 编写合约MyTokenMarket实现
+* AddLiquidity（）：函数内部调用UniswapV2Router添加Mytoken与ETH的流动性
+* buyToken（）：用户可调用该函数实现购买MyToken
 
 [w5_2](https://github.com/hadesjaky/LearnSol2/tree/master/w5_2)
 
-##w6_1
+## w6_1作业
+在上一次作业的基础上：
+* 完成代币兑换后，直接质押MasterChef
+* withdraw（）：从MasterChef提取Token方法
+
+[w6_1](https://github.com/hadesjaky/LearnSol2/tree/master/w6)
+
+## w6_2作业
+* 你会将资产存入高流动性还是低流动性的借贷协议中？
+* 你有办法提高自己在借贷协议中的存款收益吗？
+* 如何编写一个质押挖矿算法？
+
+[w6_2](https://github.com/hadesjaky/LearnSol2/tree/master/w6)
+
+## w7_1作业
+* 设计一个看涨期权Token：
+* 创建期权Token时，确认标的的价格与行权日期；
+* 发行方法（项目方角色）：格局转入的标的（ETH）发行期权Token
+* （可选）：可以用期权Token与USDT以一个较低的价格创建交易对，模拟用户购买期权。
+* 行权方法（用户角色）：在到期日当天，可通过指定的价格兑换出标的资产，并销毁期权Token
+* 过期销毁（项目方角色）：销毁所有期权Token赎回标的，USDT资金
+
+
+[w7_1](https://github.com/hadesjaky/LearnSol2/tree/master/w7_1)
+
+## w7_2作业
+* 设计一个通缩型Token（ERC20）：
+* 发行量每一年在上一年的基础上下降1%；
+* 调用方法rebase（）进行通缩
+* balanceOf（）及时反应通缩后余额的变化
+
+[w7_2](https://github.com/hadesjaky/LearnSol2/tree/master/w7_2)
+
+## w8_1作业
+*  实现一个通过DAO管理资金的Treasury：
+* 管理员可以从Treasury合约中提取资金withdraw（）
+* 治理Gov合约作为管理员
+* 通过发起提案从Treasury合约资金
+[w8_1](https://github.com/hadesjaky/LearnSol2/tree/master/w8_1)
+
+
+

@@ -15,13 +15,19 @@ const mnemonic = fs.readFileSync("../.secret").toString().trim();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  defaultNetwork: "Goerli",
+  defaultNetwork: "Sepolia",
   networks: {
     Goerli:{
       url: `https://goerli.infura.io/v3/${process.env.GOERLI_API_KEY}`,
       chainId: 5,
       accounts:[mnemonic]
+    },
+    Sepolia:{
+      url: `https://sepolia.infura.io/v3/${process.env.GOERLI_API_KEY}`,
+      chainId: 11155111,
+      accounts:[mnemonic]
     }
+
   },
   abiExporter: {
     path: './deployments/abi',
@@ -34,5 +40,5 @@ module.exports = {
   etherscan: {
     apiKey: `${process.env.ETHERSCAN}`
   },
-  solidity: "0.8.7",
+  solidity: "0.8.20",
 };

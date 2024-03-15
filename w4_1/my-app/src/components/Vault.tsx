@@ -26,10 +26,10 @@ export function Vault() {
 
 
     const [erc20Address, setContractAddress] = useState<Address>(
-        '0xc91aeFf8d82878645D704d7278EC17642e88E9B4',
+        '0x5B35CB953469Bc66874325711C1ac50cEcBFe46d',
     )
 
-    const [vaultAddress, setVaultAddress] = useState<Address>('0x5B35CB953469Bc66874325711C1ac50cEcBFe46d',)
+    const [vaultAddress, setVaultAddress] = useState<Address>('0x8172DfA02dB079C79481BA732C5A038dE2623afd',)
 
 
     return (
@@ -69,12 +69,14 @@ export function Vault() {
 
 
 function Deposit() {
+    const {address} = useAccount()
     const [amount, setAmount] = useState('0')
 
     const {config, error, isError} = usePrepareVaultDeposit({
-        args: [BigNumber.from(amount)],
+        args: ['0x99999900aB8d8D382bF6F6B9651767eE0fa1f5C9' as Address, BigNumber.from(amount)],
         enabled: Boolean(amount),
     })
+    console.log(config)
     const {data, write} = useVaultDeposit(config)
 
     const {isLoading, isSuccess} = useWaitForTransaction({
@@ -103,7 +105,7 @@ function Withdraw(){
     const [amount, setAmount] = useState('0')
 
     const {config, error, isError} = usePrepareVaultWithdraw({
-        args: [BigNumber.from(amount)],
+        args: [ BigNumber.from(amount)],
         enabled: Boolean(amount),
     })
     const {data, write} = useVaultWithdraw(config)

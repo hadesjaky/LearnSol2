@@ -10,8 +10,8 @@ const { writeAddr } = require('./artifact_log.js');
 
 async function main() {
   const Vault = await hre.ethers.getContractFactory("Vault");
-  const addr = await Vault.deploy("0xA9f60fc0F337d0912f0BB3983e6DF2B90A4E3D0e");# 这个地址是ERC721的
-
+  const addr = await Vault.deploy("0x81ED87C072E3B83E01c9C2438BA515809515efe7");
+  console.log(addr)
   await addr.deployed();
 
   console.log("Vault deployed to:", addr.address);

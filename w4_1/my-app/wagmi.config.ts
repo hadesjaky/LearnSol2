@@ -13,13 +13,13 @@ export default defineConfig({
             abi: vaultAbi,
             name: 'Vault',
             address: {
-                [chains.goerli.id]: '0x371bB96598623Ae47532ECfD755e94EA54825740'
+                [chains.sepolia.id]: '0x81B3ee1277a0a83F3776949540a0c5360b298140'
             }
         }, {
             abi: erc20Permit,
             name: 'JK Coin',
             address: {
-                [chains.goerli.id]: '0x5B35CB953469Bc66874325711C1ac50cEcBFe46d'
+                [chains.sepolia.id]: '0x81ED87C072E3B83E01c9C2438BA515809515efe7'
             }
         }
     ]
